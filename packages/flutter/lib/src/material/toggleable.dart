@@ -11,7 +11,7 @@ import 'package:flutter/scheduler.dart';
 import 'constants.dart';
 
 // Duration of the animation that moves the toggle from one state to another.
-const Duration _kToggleDuration = Duration(milliseconds: 200);
+const Duration _kToggleDuration = Duration(milliseconds: kIsWeb? 150 : 200);
 
 // Duration of the fade animation for the reaction when focus and hover occur.
 const Duration _kReactionFadeDuration = Duration(milliseconds: 50);
