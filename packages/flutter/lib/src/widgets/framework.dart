@@ -5568,6 +5568,8 @@ abstract class RenderObjectElement extends Element {
       return true;
     }());
     _renderObject = widget.createRenderObject(this);
+    _renderObject.widgetKey = widget.key?.toString();
+    _renderObject.widgetRuntimeType = widget.runtimeType.toString();
     assert(() {
       _debugDoingBuild = false;
       return true;
@@ -5594,6 +5596,8 @@ abstract class RenderObjectElement extends Element {
       return true;
     }());
     widget.updateRenderObject(this, renderObject);
+    _renderObject.widgetKey = widget.key?.toString();
+    _renderObject.widgetRuntimeType = widget.runtimeType.toString();
     assert(() {
       _debugDoingBuild = false;
       return true;

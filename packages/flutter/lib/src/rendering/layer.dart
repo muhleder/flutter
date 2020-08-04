@@ -189,14 +189,26 @@ abstract class Layer extends AbstractNode with DiagnosticableTreeMixin {
   @protected
   ui.EngineLayer? get engineLayer => _engineLayer;
 
+  // ignore: public_member_api_docs
+  String? widgetKey;
+  // ignore: public_member_api_docs
+  String? widgetRuntimeType;
+  // ignore: public_member_api_docs
+  String? widgetDescription;
+
   /// Sets the engine layer used to render this layer.
   ///
   /// Typically this field is set to the value returned by [addToScene], which
   /// in turn returns the engine layer produced by one of [ui.SceneBuilder]'s
   /// "push" methods, such as [ui.SceneBuilder.pushOpacity].
   @protected
-  set engineLayer(ui.EngineLayer? value) {
-    _engineLayer = value;
+  set engineLayer(dynamic? value) {
+    if (kIsWeb) {
+      value?.widgetKey = widgetKey;
+      value?.widgetRuntimeType = widgetRuntimeType;
+      value?.widgetDescription = widgetDescription;
+    }
+    _engineLayer = value as ui.EngineLayer;
     if (!alwaysNeedsAddToScene) {
       // The parent must construct a new engine layer to add this layer to, and
       // so we mark it as needing [addToScene].

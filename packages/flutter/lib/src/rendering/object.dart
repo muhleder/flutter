@@ -132,6 +132,9 @@ class PaintingContext extends ClipContext {
     }
     assert(identical(childLayer, child._layer));
     assert(child._layer is OffsetLayer);
+    child._layer?.widgetKey = child.widgetKey;
+    child._layer?.widgetRuntimeType = child.widgetRuntimeType;
+    child._layer?.widgetDescription = child.widgetDescription;
     assert(() {
       child._layer!.debugCreator = child.debugCreator ?? child.runtimeType;
       return true;
@@ -1301,6 +1304,13 @@ abstract class RenderObject extends AbstractNode with DiagnosticableTreeMixin im
   ///
   /// Override in subclasses with children and call the visitor for each child.
   void visitChildren(RenderObjectVisitor visitor) { }
+
+  // ignore: public_member_api_docs
+  String? widgetKey;
+  // ignore: public_member_api_docs
+  String? widgetRuntimeType;
+  // ignore: public_member_api_docs
+  String? widgetDescription;
 
   /// The object responsible for creating this render object.
   ///
