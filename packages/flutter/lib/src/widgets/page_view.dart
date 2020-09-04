@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/physics.dart';
@@ -364,6 +365,25 @@ class _PagePosition extends ScrollPositionWithSingleContext implements PageMetri
     _viewportFraction = value;
     if (oldPage != null)
       forcePixels(getPixelsFromPage(oldPage));
+  }
+
+  // https://stackoverflow.com/questions/63581685/flutter-web-smooth-scrolling-on-wheelevent-within-a-pageview/63706366#63706366
+  Timer? timer;
+  @override
+  void jumpTo(double value) {
+    goIdle();
+    if (pixels != value) {
+      final double oldPixels = pixels;
+      forcePixels(value);
+      didStartScroll();
+      didUpdateScrollPositionBy(pixels - oldPixels);
+      didEndScroll();
+    }
+    timer?.cancel();
+    timer = Timer(Duration(milliseconds: 200), () {
+      goBallistic(0.0);
+      timer = null;
+    });
   }
 
   // The amount of offset that will be added to [minScrollExtent] and subtracted
