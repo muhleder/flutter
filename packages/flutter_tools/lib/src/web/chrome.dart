@@ -182,8 +182,10 @@ class ChromiumLauncher {
       _logger.printTrace('Using ${versionResult.stdout}');
     }
 
-    final Directory userDataDir = _fileSystem.systemTempDirectory
-      .createTempSync('flutter_tools_chrome_device.');
+    final Directory userDataDir = _fileSystem.directory('.dart_tool').childDirectory('chrome_profile');
+    if (!userDataDir.existsSync()) {
+      userDataDir.createSync(recursive: true);
+    }
 
     if (cacheDir != null) {
       // Seed data dir with previous state.
