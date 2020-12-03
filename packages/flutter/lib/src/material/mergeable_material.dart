@@ -456,7 +456,7 @@ class _MergeableMaterialState extends State<MergeableMaterial> with TickerProvid
           j += 1;
         } else {
           // This is a closing gap which we need to skip.
-          assert(_children[j] is MaterialGap);
+          // assert(_children[j] is MaterialGap);
           j += 1;
         }
       }
