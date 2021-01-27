@@ -326,26 +326,22 @@ class LayoutBuilder extends ConstrainedLayoutBuilder<BoxConstraints> {
 class _RenderLayoutBuilder extends RenderBox with RenderObjectWithChildMixin<RenderBox>, RenderConstrainedLayoutBuilder<BoxConstraints, RenderBox> {
   @override
   double computeMinIntrinsicWidth(double height) {
-    assert(_debugThrowIfNotCheckingIntrinsics());
-    return 0.0;
+    return child?.computeMinIntrinsicWidth(height) ?? 0.0;
   }
 
   @override
   double computeMaxIntrinsicWidth(double height) {
-    assert(_debugThrowIfNotCheckingIntrinsics());
-    return 0.0;
+    return child?.computeMaxIntrinsicWidth(height) ?? 0.0;
   }
 
   @override
   double computeMinIntrinsicHeight(double width) {
-    assert(_debugThrowIfNotCheckingIntrinsics());
-    return 0.0;
+    return child?.computeMinIntrinsicHeight(width) ?? 0.0;
   }
 
   @override
   double computeMaxIntrinsicHeight(double width) {
-    assert(_debugThrowIfNotCheckingIntrinsics());
-    return 0.0;
+    return child?.computeMaxIntrinsicHeight(width) ?? 0.0;
   }
 
   @override
